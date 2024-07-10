@@ -1,8 +1,30 @@
-﻿@{
+﻿@model DataAnalyst.Models.UploadModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h1>Upload CSV File</h1>
+<form asp-action="Upload" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="File" class="control-label"></label>
+        <input asp-for="File" class="form-control" type="file" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Upload" class="btn btn-primary" />
+    </div>
+</form>
+
+@if (ViewBag.ImagePath != null)
+{
+    <div>
+        <h2>Analysis Result</h2>
+        <img src="@ViewBag.ImagePath" alt="Analysis Result" />
+    </div>
+}
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.ErrorMessage
+    </div>
+}
